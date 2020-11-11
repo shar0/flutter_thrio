@@ -394,6 +394,16 @@ NS_ASSUME_NONNULL_BEGIN
         [self thrio_onNotify:self.thrio_lastRoute];
     }
 
+    if (self.thrio_hidesNavigationBar_.boolValue != self.navigationController.navigationBarHidden) {
+        self.navigationController.navigationBarHidden = self.thrio_hidesNavigationBar_.boolValue;
+    }
+    
+    if (![self isKindOfClass:NavigatorFlutterViewController.class] && self.navigationController.navigationBarHidden) {
+        [self.navigationController thrio_addPopGesture];
+    } else {
+        [self.navigationController thrio_removePopGesture];
+    }
+    
     if (![self isKindOfClass:NavigatorFlutterViewController.class]) {
         if (self.thrio_hidesNavigationBar_ == nil) {
             self.thrio_hidesNavigationBar_ = @(self.navigationController.navigationBarHidden);
@@ -407,14 +417,6 @@ NS_ASSUME_NONNULL_BEGIN
         } else {
             [self.navigationController thrio_removePopGesture];
         }
-    }
-    if (self.thrio_hidesNavigationBar_.boolValue != self.navigationController.navigationBarHidden) {
-        self.navigationController.navigationBarHidden = self.thrio_hidesNavigationBar_.boolValue;
-    }
-    if (self.navigationController.navigationBarHidden) {
-        [self.navigationController thrio_addPopGesture];
-    } else {
-        [self.navigationController thrio_removePopGesture];
     }
 }
 

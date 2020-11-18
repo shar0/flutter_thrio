@@ -35,8 +35,9 @@ You can also reference the git repo directly if you want:
 ```yaml
 dependencies:
   thrio:
-    git: git@github.com:hellobike/thrio.git
-    ref: main
+    git: 
+      url: git@github.com:hellobike/thrio.git
+      ref: dev
 ```
 
 You should then run `flutter pub upgrade` or update your packages in IntelliJ.
